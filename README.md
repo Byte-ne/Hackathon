@@ -1,10 +1,10 @@
-# EcoWaste � Recycling & Sustainability Game Platform
+# EcoWaste Recycling & Sustainability Game Platform
 
 A full-stack web application for learning about recycling, playing educational games, and earning rewards through an in-game coin system and shop.
 
 ---
 
-## ?? Quick Start (Windows PowerShell)
+##Quick Start (Windows PowerShell)
 
 ### 1. Install Dependencies
 
