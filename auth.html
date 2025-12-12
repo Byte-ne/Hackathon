@@ -4,155 +4,523 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Auth — Hackathon</title>
+    <title>Sign in to EcoWaste</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Auth-specific minimal styles & animations */
-        .auth-root {
-            max-width: 720px;
-            margin: 36px auto;
-            padding: 24px;
-            border-radius: 12px;
-            background: linear-gradient(180deg, #ffffff, #f7f7f9);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, .06)
+        /* Modern Split-Screen Auth Design */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .tabs {
+        body {
+            font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #FFFFFF;
+            min-height: 100vh;
             display: flex;
-            gap: 8px;
-            margin-bottom: 18px
+            overflow: hidden;
         }
 
-        .tab {
-            padding: 10px 16px;
-            border-radius: 999px;
-            border: 1px solid #ddd;
+        .auth-container {
+            display: flex;
+            width: 100%;
+            height: 100vh;
+        }
+
+        /* Left Side - Auth Form */
+        .auth-left {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 40px;
+            background: #FFFFFF;
+            overflow-y: auto;
+        }
+
+        .auth-form-wrapper {
+            width: 100%;
+            max-width: 420px;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .auth-header {
+            margin-bottom: 48px;
+        }
+
+        .auth-header h1 {
+            font-family: 'Sora', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: #1F2937;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .auth-header p {
+            color: #6B7280;
+            font-size: 15px;
+            font-weight: 400;
+        }
+
+        /* Tabs */
+        .auth-tabs {
+            display: flex;
+            gap: 32px;
+            margin-bottom: 32px;
+            border-bottom: 2px solid #F3F4F6;
+        }
+
+        .auth-tab {
+            background: none;
+            border: none;
+            padding: 12px 0;
+            font-family: 'Sora', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: #9CA3AF;
             cursor: pointer;
-            user-select: none;
-            transition: all .28s ease
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
         }
 
-        .tab.active {
-            background: #111;
-            color: #fff;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(17, 17, 17, .08)
+        .auth-tab.active {
+            color: #00A86B;
+            border-bottom-color: #00A86B;
         }
 
-        .card {
-            padding: 18px;
-            border-radius: 10px;
-            background: #fff;
-            overflow: hidden
+        .auth-tab:hover {
+            color: #00A86B;
         }
 
-        .auth-form {
-            display: grid;
-            gap: 10px;
-            grid-template-columns: 1fr
-        }
-
-        .input {
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px solid #ccc
-        }
-
-        .btn {
-            padding: 10px 12px;
-            border-radius: 8px;
-            border: 0;
-            background: #0b74ff;
-            color: #fff;
-            cursor: pointer
-        }
-
+        /* Form Screens */
         .screen {
             display: none;
-            padding: 18px;
-            text-align: center
         }
 
         .screen.active {
-            display: block
+            display: block;
+            animation: fadeIn 0.4s ease;
         }
 
-        .fade-in {
-            animation: fadeIn .45s ease both
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
         }
 
+        /* Input Groups */
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .input-label {
+            font-family: 'Sora', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: #374151;
+            letter-spacing: 0.2px;
+        }
+
+        .input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #E5E7EB;
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: 'Open Sans', sans-serif;
+            color: #1F2937;
+            background: #FFFFFF;
+            transition: all 0.3s ease;
+        }
+
+        .input:focus {
+            outline: none;
+            border-color: #00A86B;
+            box-shadow: 0 0 0 3px rgba(0, 168, 107, 0.1);
+        }
+
+        .input::placeholder {
+            color: #9CA3AF;
+        }
+
+        /* Buttons */
+        .btn-primary {
+            width: 100%;
+            padding: 14px 24px;
+            background: #00A86B;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Sora', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 8px;
+        }
+
+        .btn-primary:hover {
+            background: #00563B;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 168, 107, 0.3);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            width: 100%;
+            padding: 14px 24px;
+            background: transparent;
+            color: #6B7280;
+            border: 2px solid #E5E7EB;
+            border-radius: 8px;
+            font-family: 'Sora', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: #00A86B;
+            color: #00A86B;
+            background: rgba(0, 168, 107, 0.05);
+        }
+
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        /* Messages */
+        .auth-msg {
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            text-align: center;
+            margin-top: 16px;
+        }
+
+        .auth-msg.error {
+            background: rgba(239, 68, 68, 0.1);
+            color: #DC2626;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        .auth-msg.success {
+            background: rgba(16, 185, 129, 0.1);
+            color: #059669;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        /* Welcome Screen */
+        .welcome-content {
+            text-align: center;
+        }
+
+        .welcome-title {
+            font-family: 'Sora', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #1F2937;
+            margin-bottom: 16px;
+        }
+
+        .welcome-text {
+            color: #6B7280;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 32px;
+        }
+
+        /* Right Side - Custom Illustration */
+        .auth-right {
+            flex: 1;
+            background: linear-gradient(135deg, #00A86B 0%, #00563B 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .auth-right::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(11, 218, 81, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            top: -200px;
+            right: -200px;
+            animation: floatOrb 8s ease-in-out infinite;
+        }
+
+        .auth-right::after {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(141, 182, 0, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            bottom: -150px;
+            left: -150px;
+            animation: floatOrb 10s ease-in-out infinite reverse;
+        }
+
+        .illustration-container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .eco-illustration {
+            width: 100%;
+            max-width: 400px;
+            margin-bottom: 40px;
+            filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.2));
+            animation: floatSlow 6s ease-in-out infinite;
+        }
+
+        .image-content {
+            color: white;
+            text-align: center;
+            max-width: 450px;
+        }
+
+        .image-content h2 {
+            font-family: 'Sora', sans-serif;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .image-content p {
+            font-size: 16px;
+            line-height: 1.6;
+            opacity: 0.95;
+        }
+
+        @keyframes floatSlow {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes floatOrb {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-15px) rotate(2deg);
+            }
+        }
+
+        /* Animations */
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(8px)
             }
-
             to {
                 opacity: 1;
-                transform: none
             }
         }
 
-        .welcome {
-            font-size: 18px;
-            margin-bottom: 12px
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .logout {
-            background: #ff4b4b
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .auth-right {
+                display: none;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .auth-left {
+                padding: 40px 24px;
+            }
+
+            .auth-header h1 {
+                font-size: 28px;
+            }
+
+            .auth-tabs {
+                gap: 24px;
+            }
         }
     </style>
 </head>
 
 <body>
-    <div class="auth-root">
-        <div class="tabs" role="tablist">
-            <div class="tab active" data-target="login">Login</div>
-            <div class="tab" data-target="signup">Sign Up</div>
-            <div class="tab" data-target="example">Example</div>
-        </div>
+    <div class="auth-container">
+        <!-- Left Side - Form -->
+        <div class="auth-left">
+            <div class="auth-form-wrapper">
+                <div class="auth-header">
+                    <h1>Sign in to EcoWaste</h1>
+                    <p>Welcome back! Please enter your details.</p>
+                </div>
 
-        <div class="card">
-            <div id="login" class="screen active fade-in">
-                <form id="loginForm" class="auth-form">
-                    <input id="login-username" class="input" placeholder="Username" required />
-                    <input id="login-password" type="password" class="input" placeholder="Password" required />
-                    <div style="display:flex;gap:8px;align-items:center">
-                        <button class="btn" type="submit">Log in</button>
-                        <button id="toSignup" type="button" class="btn" style="background:#6c757d">Create
-                            account</button>
+                <div class="auth-tabs">
+                    <button class="auth-tab active" data-target="login">Login</button>
+                    <button class="auth-tab" data-target="signup">Sign Up</button>
+                </div>
+
+                <!-- Login Screen -->
+                <div id="login" class="screen active">
+                    <form id="loginForm" class="auth-form">
+                        <div class="input-group">
+                            <label class="input-label" for="login-username">Username</label>
+                            <input id="login-username" class="input" type="text" placeholder="Enter your username" required />
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label" for="login-password">Password</label>
+                            <input id="login-password" class="input" type="password" placeholder="Enter your password" required />
+                        </div>
+                        <div class="btn-group">
+                            <button class="btn-primary" type="submit">Sign in</button>
+                            <button id="toSignup" class="btn-secondary" type="button">Create new account</button>
+                        </div>
+                        <div id="login-msg" class="auth-msg" style="display: none;"></div>
+                    </form>
+                </div>
+
+                <!-- Signup Screen -->
+                <div id="signup" class="screen">
+                    <form id="signupForm" class="auth-form">
+                        <div class="input-group">
+                            <label class="input-label" for="signup-username">Username</label>
+                            <input id="signup-username" class="input" type="text" placeholder="Choose a username" required />
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label" for="signup-password">Password</label>
+                            <input id="signup-password" class="input" type="password" placeholder="Create a password" required />
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label" for="signup-password2">Confirm Password</label>
+                            <input id="signup-password2" class="input" type="password" placeholder="Confirm your password" required />
+                        </div>
+                        <div class="btn-group">
+                            <button class="btn-primary" type="submit">Create account</button>
+                            <button id="toLogin" class="btn-secondary" type="button">Back to login</button>
+                        </div>
+                        <div id="signup-msg" class="auth-msg" style="display: none;"></div>
+                    </form>
+                </div>
+
+                <!-- Example/Demo Screen -->
+                <div id="example" class="screen">
+                    <div class="welcome-content">
+                        <h2 class="welcome-title">Welcome to EcoWaste! 🌍</h2>
+                        <p class="welcome-text">You're not logged in yet. Create an account or sign in to start your journey towards a greener planet.</p>
+                        <button id="goLogin" class="btn-primary">Go to Login</button>
                     </div>
-                    <div id="login-msg" aria-live="polite"></div>
-                </form>
-            </div>
+                </div>
 
-            <div id="signup" class="screen fade-in">
-                <form id="signupForm" class="auth-form">
-                    <input id="signup-username" class="input" placeholder="Choose a username" required />
-                    <input id="signup-password" type="password" class="input" placeholder="Choose a password"
-                        required />
-                    <input id="signup-password2" type="password" class="input" placeholder="Repeat password" required />
-                    <div style="display:flex;gap:8px;align-items:center">
-                        <button class="btn" type="submit">Sign up</button>
-                        <button id="toLogin" type="button" class="btn" style="background:#6c757d">Back to login</button>
+                <!-- Post Login Screen -->
+                <div id="postLogin" class="screen">
+                    <div class="welcome-content">
+                        <h2 class="welcome-title">Welcome back, <span id="userNameDisplay"></span>! 🎉</h2>
+                        <p class="welcome-text">You've successfully logged in. Ready to make a difference?</p>
+                        <div class="btn-group">
+                            <button id="goToApp" class="btn-primary">Open App</button>
+                            <button id="logoutBtn" class="btn-secondary">Logout</button>
+                        </div>
                     </div>
-                    <div id="signup-msg" aria-live="polite"></div>
-                </form>
-            </div>
-
-            <div id="example" class="screen fade-in">
-                <div id="example-inner">
-                    <div class="welcome">Welcome — you are not logged in yet.</div>
-                    <button id="goLogin" class="btn">Go to Login</button>
                 </div>
             </div>
+        </div>
 
-            <div id="postLogin" class="screen">
-                <div class="welcome">Welcome back, <span id="userNameDisplay"></span>!</div>
-                <p>This is an example protected screen you see after logging in or signing up.</p>
-                <div style="display:flex;gap:8px;justify-content:center;margin-top:12px">
-                    <button id="logoutBtn" class="btn logout">Logout</button>
-                    <button id="goToApp" class="btn">Open App (placeholder)</button>
+        <!-- Right Side - Illustration -->
+        <div class="auth-right">
+            <div class="illustration-container">
+                <svg class="eco-illustration" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Background circles -->
+                    <circle cx="200" cy="200" r="180" fill="rgba(255, 255, 255, 0.1)" />
+                    <circle cx="200" cy="200" r="140" fill="rgba(255, 255, 255, 0.08)" />
+                    
+                    <!-- Wind turbines -->
+                    <g transform="translate(100, 180)">
+                        <rect x="-3" y="0" width="6" height="120" fill="#FFFFFF" opacity="0.9" />
+                        <circle cx="0" cy="0" r="8" fill="#FFFFFF" />
+                        <g class="blade" transform="rotate(0)">
+                            <ellipse cx="0" cy="-35" rx="6" ry="35" fill="#FFFFFF" opacity="0.95" />
+                            <ellipse cx="30" cy="18" rx="6" ry="35" fill="#FFFFFF" opacity="0.95" transform="rotate(120 0 0)" />
+                            <ellipse cx="-30" cy="18" rx="6" ry="35" fill="#FFFFFF" opacity="0.95" transform="rotate(240 0 0)" />
+                        </g>
+                    </g>
+                    
+                    <g transform="translate(300, 200)">
+                        <rect x="-2.5" y="0" width="5" height="100" fill="#FFFFFF" opacity="0.85" />
+                        <circle cx="0" cy="0" r="6" fill="#FFFFFF" />
+                        <g class="blade" transform="rotate(45)">
+                            <ellipse cx="0" cy="-28" rx="5" ry="28" fill="#FFFFFF" opacity="0.9" />
+                            <ellipse cx="24" cy="14" rx="5" ry="28" fill="#FFFFFF" opacity="0.9" transform="rotate(120 0 0)" />
+                            <ellipse cx="-24" cy="14" rx="5" ry="28" fill="#FFFFFF" opacity="0.9" transform="rotate(240 0 0)" />
+                        </g>
+                    </g>
+                    
+                    <!-- Trees -->
+                    <g transform="translate(50, 280)">
+                        <polygon points="0,-50 -20,0 20,0" fill="#FFFFFF" opacity="0.7" />
+                        <polygon points="0,-35 -15,5 15,5" fill="#FFFFFF" opacity="0.8" />
+                        <rect x="-3" y="0" width="6" height="25" fill="#FFFFFF" opacity="0.6" />
+                    </g>
+                    
+                    <g transform="translate(350, 290)">
+                        <polygon points="0,-40 -15,0 15,0" fill="#FFFFFF" opacity="0.65" />
+                        <polygon points="0,-28 -12,5 12,5" fill="#FFFFFF" opacity="0.75" />
+                        <rect x="-2.5" y="0" width="5" height="20" fill="#FFFFFF" opacity="0.55" />
+                    </g>
+                    
+                    <!-- Recycling symbol in center -->
+                    <g transform="translate(200, 220)">
+                        <circle cx="0" cy="0" r="50" fill="rgba(255, 255, 255, 0.15)" />
+                        <path d="M 0,-30 L 15,-10 L -15,-10 Z" fill="#FFFFFF" opacity="0.9" />
+                        <path d="M 26,15 L 11,35 L 11,5 Z" fill="#FFFFFF" opacity="0.9" transform="rotate(120 0 0)" />
+                        <path d="M -26,15 L -11,35 L -11,5 Z" fill="#FFFFFF" opacity="0.9" transform="rotate(240 0 0)" />
+                        <circle cx="0" cy="0" r="12" fill="rgba(0, 168, 107, 1)" />
+                    </g>
+                    
+                    <!-- Leaves floating -->
+                    <g opacity="0.6">
+                        <ellipse cx="80" cy="100" rx="8" ry="12" fill="#FFFFFF" transform="rotate(45 80 100)" />
+                        <ellipse cx="320" cy="120" rx="6" ry="10" fill="#FFFFFF" transform="rotate(-30 320 120)" />
+                        <ellipse cx="150" cy="80" rx="7" ry="11" fill="#FFFFFF" transform="rotate(60 150 80)" />
+                    </g>
+                </svg>
+                
+                <div class="image-content">
+                    <h2>Go green and reduce your carbon footprint</h2>
+                    <p>Join thousands of users making a positive impact on our environment through smart waste management and recycling.</p>
                 </div>
             </div>
         </div>
@@ -160,6 +528,45 @@
 
     <script src="data.js"></script>
     <script src="script.js"></script>
+    <script>
+        // Tab switching
+        document.querySelectorAll('.auth-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                const target = tab.dataset.target;
+                
+                // Update active tab
+                document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                // Update active screen
+                document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+                document.getElementById(target).classList.add('active');
+            });
+        });
+
+        // Button navigation
+        document.getElementById('toSignup')?.addEventListener('click', () => {
+            document.querySelector('[data-target="signup"]').click();
+        });
+
+        document.getElementById('toLogin')?.addEventListener('click', () => {
+            document.querySelector('[data-target="login"]').click();
+        });
+
+        document.getElementById('goLogin')?.addEventListener('click', () => {
+            document.querySelector('[data-target="login"]').click();
+        });
+
+        // Show/hide messages
+        function showMessage(elementId, message, isError = false) {
+            const msgEl = document.getElementById(elementId);
+            if (msgEl) {
+                msgEl.textContent = message;
+                msgEl.className = isError ? 'auth-msg error' : 'auth-msg success';
+                msgEl.style.display = 'block';
+            }
+        }
+    </script>
 </body>
 
 </html>

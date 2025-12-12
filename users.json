@@ -44,10 +44,38 @@
     "created": 1764928004010,
     "highscores": {
       "sorting": 70,
-      "quiz": 100
+      "quiz": 400
     },
-    "coins": 7,
+    "coins": 27,
     "ownedTags": [
+      "green-1",
+      "green-2"
+    ]
+  },
+  "example": {
+    "username": "example",
+    "passwordHash": "$2b$10$gL7iAFqwzUNAuXZXh8mJhusbWzBAPPbSs4sn7x6HQXBBjMDhahti2",
+    "created": 1764964075264,
+    "highscores": {
+      "sorting": 68,
+      "quiz": 200
+    },
+    "coins": 6,
+    "ownedTags": [
+      "green-2"
+    ]
+  },
+  "Neha": {
+    "username": "Neha",
+    "passwordHash": "$2b$10$wMYe4BaS0UkJkqXXU5QBvOhl9tNRGx3fFuIewo7AJ5b5M7lr4Xrxq",
+    "created": 1765096419080,
+    "highscores": {
+      "sorting": 66,
+      "quiz": 800
+    },
+    "coins": 5,
+    "ownedTags": [
+      "green-7",
       "green-1"
     ]
   }

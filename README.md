@@ -4,17 +4,6 @@ A full-stack web application for learning about recycling, playing educational g
 
 ---
 
-**If following the process is lengthy and the storage is too much for you to download, and Node.js is not installed on your system
-You could paste the following link in your browser:**
-```powershell
-https://ecowaste-0vkj.onrender.com/
-```
-### Why does this link do the same as the process below?
-
-This link is the link obtained by hosting the full GitHub repository on **Render**. 
-The full backend is not required to manually install and run in PowerShell. Instead, it is auto-hosted on Render and the 
-Backend and Database are always active.
-
 ## ?? Quick Start (Windows PowerShell)
 
 ### 1. Install Dependencies
@@ -30,7 +19,7 @@ Create or edit `hack.env` in your project root with:
 
 ```env
 MONGO_URI=mongodb+srv://YOUR_USERNAME:YOUR_PASSWORD@YOUR_CLUSTER.mongodb.net/hackathon?appName=YOUR_APP_NAME
-GROQ_API_KEY=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
+GROQ_API_KEY=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
 GROQ_MODEL=groq/compound
 ```
 
@@ -100,7 +89,7 @@ http://localhost:3000/
 - Profile system with coin display and owned tags
 
 ### **Games**
-- **Sorting Game**: Drag waste items into the correct bins, earn coins on new high scores (saved to MongoDB)
+- **Sorting Game**: Drag waste items into correct bins, earn coins on new high scores (saved to MongoDB)
 - **Quiz Game**: AI-generated questions on recycling topics, earn coins (stored in MongoDB)
 
 ### **Shop & Economy**
@@ -200,4 +189,4 @@ User data is stored in MongoDB Atlas with this structure:
 
 ##  License
 
-Hackathon project use for learning and development.
+Hackathon demo project  use freely for learning and development.

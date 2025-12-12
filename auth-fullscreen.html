@@ -75,8 +75,8 @@
             <!-- Right Side - Auth Forms -->
             <div class="auth-right">
                 <div class="auth-content">
-                    <h1>EcoWaste</h1>
-                    <p class="auth-subtitle">Join us in making a greener planet</p>
+                    <h1>Sign in to EcoWaste</h1>
+                    <p class="auth-subtitle">Welcome back! Please enter your details.</p>
 
                     <div class="auth-tabs">
                         <button class="auth-tab active" data-tab="login">Login</button>
@@ -87,16 +87,15 @@
                     <div id="loginTab" class="auth-form active">
                         <form id="fullscreenLoginForm">
                             <div class="form-group">
-                                <label for="fs-login-username">Username</label>
-                                <input type="text" id="fs-login-username" placeholder="Enter your username" required>
+                                <label class="form-label" for="fs-login-username">Username</label>
+                                <input class="form-input" type="text" id="fs-login-username" placeholder="Enter your username" required>
                             </div>
                             <div class="form-group">
-                                <label for="fs-login-password">Password</label>
-                                <input type="password" id="fs-login-password" placeholder="Enter your password"
-                                    required>
+                                <label class="form-label" for="fs-login-password">Password</label>
+                                <input class="form-input" type="password" id="fs-login-password" placeholder="Enter your password" required>
                             </div>
-                            <button type="submit" class="auth-submit-btn">Log In</button>
-                            <div id="fs-login-msg" class="auth-msg"></div>
+                            <button type="submit" class="form-button">Sign in</button>
+                            <div id="fs-login-msg" class="form-error" style="display: none;"></div>
                         </form>
                     </div>
 
@@ -104,20 +103,19 @@
                     <div id="signupTab" class="auth-form">
                         <form id="fullscreenSignupForm">
                             <div class="form-group">
-                                <label for="fs-signup-username">Username</label>
-                                <input type="text" id="fs-signup-username" placeholder="Choose a username" required>
+                                <label class="form-label" for="fs-signup-username">Username</label>
+                                <input class="form-input" type="text" id="fs-signup-username" placeholder="Choose a username" required>
                             </div>
                             <div class="form-group">
-                                <label for="fs-signup-password">Password</label>
-                                <input type="password" id="fs-signup-password" placeholder="Create a password" required>
+                                <label class="form-label" for="fs-signup-password">Password</label>
+                                <input class="form-input" type="password" id="fs-signup-password" placeholder="Create a password" required>
                             </div>
                             <div class="form-group">
-                                <label for="fs-signup-password2">Confirm Password</label>
-                                <input type="password" id="fs-signup-password2" placeholder="Confirm your password"
-                                    required>
+                                <label class="form-label" for="fs-signup-password2">Confirm Password</label>
+                                <input class="form-input" type="password" id="fs-signup-password2" placeholder="Confirm your password" required>
                             </div>
-                            <button type="submit" class="auth-submit-btn">Sign Up</button>
-                            <div id="fs-signup-msg" class="auth-msg"></div>
+                            <button type="submit" class="form-button">Create account</button>
+                            <div id="fs-signup-msg" class="form-error" style="display: none;"></div>
                         </form>
                     </div>
                 </div>
